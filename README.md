@@ -1,10 +1,10 @@
 # Node Classification on OGBN Products Dataset
-## Problem Statement
+## Problem Statement 
 In this project our aim is to perform node-level prediction for supervised multi-class classification of Amazon products into their categories. 
 
 We are making use of a subset of the ogbn-products dataset and used GCN and GraphSAGE algorithms to perform node classification.
 
-## Dataset Description
+## Dataset Description ([dataset](https://ogb.stanford.edu/docs/nodeprop/))
 - The ogbn-products dataset is an undirected and unweighted graph.
 - It represents an Amazon product co-purchasing network.
 - The nodes in the graph represent the products sold in Amazon.
@@ -14,20 +14,20 @@ We are making use of a subset of the ogbn-products dataset and used GCN and Grap
 
 ### Picking a subset of dataset
 
-#nodes : 2,449,029
+#nodes : 2,449,029<br>
 #edges : 61,859,140
 
 Since the dataset is really huge, we have reduced the number of classes from 47 to 6.
 
 We have considered the following classes:
-0: Home & Kitchen
-5: Patio, Lawn & Garden
-21: Tools & Home Improvement
-25: Appliances
-26: Kitchen & Dining
-37: Home Improvement
-
-#nodes in the subset : 173157
+- 0: Home & Kitchen
+- 5: Patio, Lawn & Garden
+- 21: Tools & Home Improvement
+- 25: Appliances
+- 26: Kitchen & Dining
+- 37: Home Improvement
+<br>
+#nodes in the subset : 173157<br>
 #edges in the subset : 4913889
 
 ### Dataset splitting
@@ -41,10 +41,10 @@ Stratified sampling aims at splitting a data set by ensuring  that relative clas
 
 
 Train set - {0: 60531,   2: 34518,  1: 24330, 3: 1404,    4: 256,   5: 170}
-Validation set - {0: 25943,   2: 14794,   1: 10427,  3: 601,     4: 110,   5: 73}
+Test set - {0: 25943,   2: 14794,   1: 10427,  3: 601,     4: 110,   5: 73}
 
-## GCN (Graph Convolution Network)
-GCN is an algorithm that can use both the graph topological information (i.e., a node's neighbourhood) and node features, then extract this information to produce node representations or dense vector embeddings.
+## GCN (Graph Convolution Network) ([Paper](https://arxiv.org/abs/1609.02907v4))
+GCN is an algorithm that can extract node representations or dense vector embeddings by using both node attributes and graph topological information (i.e., a node's neighbourhood).
 
 ![](https://i.imgur.com/AvDdVuv.png)
 
@@ -57,8 +57,8 @@ GCN is an algorithm that can use both the graph topological information (i.e., a
 
 Therefore, we need an inductive approach rather than a transductive one
 
-## GraphSAGE (SAmple and aggreGatE) 
-GraphSage is an inductive version of GCNs which implies that it does not require the whole graph structure during learning and it can generalize well to the unseen nodes. It is a branch of graph neural networks that learns node representations by sampling and aggregating neighbors from multiple search depths or hops.
+## GraphSAGE (SAmple and aggreGatE) ([Paper](https://arxiv.org/abs/1706.02216))
+GraphSage is an inductive variant of GCNs, which means that it does not need to learn the entire graph structure and can generalise well to unseen nodes. By selecting and combining neighbours from various search depths or hops, this subset of graph neural networks learns node representations.
 
 ![](https://i.imgur.com/GmDwa0g.png)
 
@@ -87,16 +87,34 @@ GraphSAGE layers are as follows:
 ## Results
 
 ### GCN
-![](https://i.imgur.com/Nn5wXkW.png)
+![](https://i.imgur.com/GMeKSLN.jpg)
+
 
 - The model almost converged at around 1000 epochs.
 - An accuracy of 91.27% was achieved on train dataset.
 - An accuracy of 91.15% was achieved on test dataset.
 
 ### GraphSAGE
-![](https://i.imgur.com/LmCWiYu.png)
+![](https://i.imgur.com/MjCRDLk.jpg)
+
+
 - The model almost converged at around 17 epochs.
 - An accuracy of 94.88% was achieved on train dataset.
 - An accuracy of 94.72% was achieved on test dataset.
+
+
+### GCN vs GraphSAGE
+
+
+| GCN                                                    | GraphSAGE                                                                         |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| No. of parameters = 4486                               | No. of parameters = 54534                                                         |
+| No. epochs taken to converge ~ 1000                    | No. epochs taken to converge ~ 15 |
+| Training accuracy = 91.3% | Training accuracy = 94.9% |
+| Test accuracy = 91.1% | Test accuracy = 94.7% |
+| Learns representations for only the dominant 3 classes | Learns representations for the dominant 4 classes, hence more expressive than GCN |
+
+
+![](https://i.imgur.com/qKMrQ25.png)
 
 

@@ -40,8 +40,8 @@ Stratified sampling aims at splitting a data set by ensuring  that relative clas
 {0: 0, 5: 1, 21: 2, 25: 3, 26: 4, 37: 5}
 
 
-Train set - {0: 60531,   2: 34518,  1: 24330, 3: 1404,    4: 256,   5: 170}<br>
-Test set - {0: 25943,   2: 14794,   1: 10427,  3: 601,     4: 110,   5: 73}
+- Train set - {0: 60531,   2: 34518,  1: 24330, 3: 1404,    4: 256,   5: 170}
+- Test set - {0: 25943,   2: 14794,   1: 10427,  3: 601,     4: 110,   5: 73}
 
 ## GCN (Graph Convolution Network) ([Paper](https://arxiv.org/abs/1609.02907v4))
 GCN is an algorithm that can extract node representations or dense vector embeddings by using both node attributes and graph topological information (i.e., a node's neighbourhood).
